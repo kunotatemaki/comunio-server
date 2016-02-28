@@ -56,6 +56,7 @@
 	        							<div>
 	          								<md-button class="md-raised md-primary" ng-click="toggleLeft()" class="md-primary" hide-gt-md>Toggle left</md-button>
 	        							</div>
+	        							<div class="slide-animate" ng-include="template.url"></div>
 	      							</div>
 	      							<div flex></div>
 	    						</md-content>

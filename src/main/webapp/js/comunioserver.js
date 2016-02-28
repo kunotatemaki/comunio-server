@@ -41,11 +41,18 @@
       $scope.$watch('selectedPlayer', function() {
         if( $scope.selectedPlayer ===  $scope.clasificationOption.option){
            $scope.displayedPlayer =  $scope.clasificationOption.display;
+           $scope.template = $scope.templates[0];
         }else{
            $scope.displayedPlayer = $filter('getByOption')($scope.participants, 'table_name', $scope.selectedPlayer).name;
+           $scope.template = $scope.templates[1];
         }
       });
       
+      $scope.templates =
+        [ { name: 'template1.html', url: './html/clasification.html'},
+          { name: 'template2.html', url: './html/participant.html'} ];
+      //$scope.template = $scope.templates[0];
+
       /**
        * Supplies a function that will continue to operate until the
        * time is up.
