@@ -11,7 +11,6 @@
         url = urlComunio.urlBase + urlComunio.urlRoot + urlComunio.getPageDataMethod;
         
         $http.get(url)
-        //$http.get("http://www.omdbapi.com/?t=titanic&tomatoes=true&plot=full")
         .then(function(response) {
             //First function handles success
           $scope.participants = response.data.participants;
@@ -106,23 +105,9 @@
       };
     })
     .controller('GetPageData', function($scope, $http) {
-      //fetch($scope);
       serverCalls.getParticipants($scope, $http);
       
       
-      /*function fetch($scope) {
-        url = urlComunio.urlBase + urlComunio.urlRoot + urlComunio.getPageDataMethod;
-        
-        $http.get(url)
-        //$http.get("http://www.omdbapi.com/?t=titanic&tomatoes=true&plot=full")
-        .then(function(response) {
-            //First function handles success
-        	$scope.participants = response.data.participants;
-        }, function(response) {
-          //Second function handles error
-          $scope.content = "Something went wrong";
-        });
-      }*/
     });
 
 })();
