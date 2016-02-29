@@ -7,27 +7,30 @@ public class Participant{
 	
 	private Integer Id;
 	@Expose@SerializedName("name")
-	private String nombre;
+	private String name;
 	@Expose@SerializedName("login")
 	private String login;
 	@Expose@SerializedName("table_name")
-	private String tabla;
+	private String tableName;
 	@Expose@SerializedName("first_round")
-	private Double j_inicial;
+	private Double firstRound;
 	@Expose@SerializedName("last_round")
-	private Double j_final;
+	private Double lastRound;
 	@Expose@SerializedName("starting_points")
-	private Integer puntos_inicio;
+	private Integer startingPoints;
 	@Expose@SerializedName("starting_bonus")
-	private Integer prima_inicial;
+	private Integer startingBonus;
 	public Integer getId() {
 		return Id;
 	}
-	public String getNombre() {
-		return nombre;
+	public void setId(Integer id) {
+		Id = id;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getLogin() {
 		return login;
@@ -35,39 +38,34 @@ public class Participant{
 	public void setLogin(String login) {
 		this.login = login;
 	}
-	public String getTabla() {
-		return tabla;
+	public String getTableName() {
+		return tableName;
 	}
-	public void setTabla(String tabla) {
-		this.tabla = tabla;
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
 	}
-	public Double getJ_inicial() {
-		return j_inicial;
+	public Double getFirstRound() {
+		return firstRound;
 	}
-	public void setJ_inicial(Double j_inicial) {
-		this.j_inicial = j_inicial;
+	public void setFirstRound(Double firstRound) {
+		this.firstRound = firstRound;
 	}
-	public Double getJ_final() {
-		return j_final;
+	public Double getLastRound() {
+		return lastRound;
 	}
-	public void setJ_final(Double j_final) {
-		this.j_final = j_final;
+	public void setLastRound(Double lastRound) {
+		this.lastRound = lastRound;
 	}
-	public Integer getPuntos_inicio() {
-		return puntos_inicio;
+	public Integer getStartingPoints() {
+		return startingPoints;
 	}
-	public void setPuntos_inicio(Integer puntos_inicio) {
-		this.puntos_inicio = puntos_inicio;
+	public void setStartingPoints(Integer startingPoints) {
+		this.startingPoints = startingPoints;
 	}
-	public Integer getPrima_inicial() {
-		return prima_inicial;
+	public Integer getStartingBonus() {
+		return startingBonus;
 	}
-	public void setPrima_inicial(Integer prima_inicial) {
-		this.prima_inicial = prima_inicial;
+	public void setStartingBonus(Integer startingBonus) {
+		this.startingBonus = startingBonus;
 	}
-	public void setId(Integer id) {
-		Id = id;
-	}
-	
-	
 }

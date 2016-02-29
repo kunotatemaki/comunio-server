@@ -23,9 +23,19 @@ public class ComunioRestService {
 	@Path("/get_participants/")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Response getParticipants() {
-		JsonParser parser = new JsonParser();
 		ComunioMethods methods= new ComunioMethods();
 		JsonObject response = methods.getParticipantsAsJSON();
+		// creacion del json de vuelta
+		return Response.status(HttpURLConnection.HTTP_OK).entity(response.toString()).build();
+		
+	}
+	
+	@GET
+	@Path("/get_page_data/")
+	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	public Response getPageData() {
+		ComunioMethods methods= new ComunioMethods();
+		JsonObject response = methods.getPageDataAsJSON();
 		// creacion del json de vuelta
 		return Response.status(HttpURLConnection.HTTP_OK).entity(response.toString()).build();
 		

@@ -3,12 +3,25 @@
   var urlComunio = {
     urlBase : "http://localhost:8080/comunio/",
     urlRoot : "rest/services/",
-    getPageDataMethod : "get_participants"
+    getPageDataMethodName : "get_page_data",
+    getParticipantsMethodName : "get_participants"
   }
   
   var serverCalls = {
-    getParticipants : function($scope, $http) {
-        url = urlComunio.urlBase + urlComunio.urlRoot + urlComunio.getPageDataMethod;
+    getParticipantsMethod : function($scope, $http) {
+        url = urlComunio.urlBase + urlComunio.urlRoot + urlComunio.getParticipantsMethodName;
+        
+        $http.get(url)
+        .then(function(response) {
+            //First function handles success
+          $scope.participants = response.data.participants;
+        }, function(response) {
+          //Second function handles error
+          $scope.content = "Something went wrong";
+        });
+      },
+      getPageDataMethod : function($scope, $http) {
+        url = urlComunio.urlBase + urlComunio.urlRoot + urlComunio.getPageDataMethodName;
         
         $http.get(url)
         .then(function(response) {
@@ -113,7 +126,6 @@
     })
     .controller('GetPageData', function($scope, $http) {
       serverCalls.getParticipants($scope, $http);
-      
       
     });
 
