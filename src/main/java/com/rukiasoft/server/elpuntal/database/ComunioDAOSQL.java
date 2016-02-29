@@ -11,6 +11,7 @@ import org.springframework.web.context.ContextLoader;
 import com.rukiasoft.server.elpuntal.classes.Configuration;
 import com.rukiasoft.server.elpuntal.classes.Log;
 import com.rukiasoft.server.elpuntal.classes.Participant;
+import com.rukiasoft.server.elpuntal.classes.Player;
 import com.rukiasoft.server.elpuntal.classes.Round;
 import com.rukiasoft.server.elpuntal.classes.Score;
 import com.rukiasoft.server.elpuntal.classes.Signing;
@@ -50,82 +51,98 @@ public class ComunioDAOSQL implements ComunioDAO{
 		Integer valor = null;
 		Configuration conf = new Configuration();
 		
-		sql ="SELECT valor from " + Constants.CONF_TABLE + " WHERE opcion = '" + Constants.BONUS_GOAL + "';";
+		sql ="SELECT " + Constants.FIELD_VALUE + " from " + Constants.CONF_TABLE 
+				+ " WHERE " + Constants.FIELD_OPTION + " = '" + Constants.BONUS_GOAL + "';";
 		error = "Error leyendo valor de configuracion: " + Constants.BONUS_GOAL;
 		valor = jdbc.queryForObject(sql, Integer.class);
 		conf.setGoalBonus(valor);
 	
-		sql ="SELECT valor from " + Constants.CONF_TABLE + " WHERE opcion = '" + Constants.BONUS_GOALKEEPER + "';";
+		sql ="SELECT " + Constants.FIELD_VALUE + " from " + Constants.CONF_TABLE 
+				+ " WHERE " + Constants.FIELD_OPTION + " = '" + Constants.BONUS_GOALKEEPER + "';";
 		error = "Error leyendo valor de configuracion: " + Constants.BONUS_GOALKEEPER;
 		valor = jdbc.queryForObject(sql, Integer.class);
 		conf.setGoalkeeperBonus(valor);
 		
-		sql ="SELECT valor from " + Constants.CONF_TABLE + " WHERE opcion = '" + Constants.BONUS_LAST_IN_ROUND + "';";
+		sql ="SELECT " + Constants.FIELD_VALUE + " from " + Constants.CONF_TABLE 
+				+ " WHERE " + Constants.FIELD_OPTION + " = '" + Constants.BONUS_LAST_IN_ROUND + "';";
 		error = "Error leyendo valor de configuracion: " + Constants.BONUS_LAST_IN_ROUND;
 		valor = jdbc.queryForObject(sql, Integer.class);
 		conf.setRoundBonus(valor);
 		
-		sql ="SELECT valor from " + Constants.CONF_TABLE + " WHERE opcion = '" + Constants.BONUS_LAST_IN_CLASSIFICATION + "';";
+		sql ="SELECT " + Constants.FIELD_VALUE + " from " + Constants.CONF_TABLE 
+				+ " WHERE " + Constants.FIELD_OPTION + " = '" + Constants.BONUS_LAST_IN_CLASSIFICATION + "';";
 		error = "Error leyendo valor de configuracion: " + Constants.BONUS_LAST_IN_CLASSIFICATION;
 		valor = jdbc.queryForObject(sql, Integer.class);
 		conf.setGeneralBonus(valor);
 		
-		sql ="SELECT valor from " + Constants.CONF_TABLE + " WHERE opcion = '" + Constants.REMO_MAX_PLAYERS + "';";
+		sql ="SELECT " + Constants.FIELD_VALUE + " from " + Constants.CONF_TABLE 
+				+ " WHERE " + Constants.FIELD_OPTION + " = '" + Constants.REMO_MAX_PLAYERS + "';";
 		error = "Error leyendo valor de configuracion: " + Constants.REMO_MAX_PLAYERS;
 		valor = jdbc.queryForObject(sql, Integer.class);
 		conf.setMaxPlayersPenalty(valor);
 		
-		sql ="SELECT valor from " + Constants.CONF_TABLE + " WHERE opcion = '" + Constants.REMO_MAX_PLAYERS_PER_TEAM + "';";
+		sql ="SELECT " + Constants.FIELD_VALUE + " from " + Constants.CONF_TABLE 
+				+ " WHERE " + Constants.FIELD_OPTION + " = '" + Constants.REMO_MAX_PLAYERS_PER_TEAM + "';";
 		error = "Error leyendo valor de configuracion: " + Constants.REMO_MAX_PLAYERS_PER_TEAM;
 		valor = jdbc.queryForObject(sql, Integer.class);
 		conf.setMaxPlayersTeamPenalty(valor);
 		
-		sql ="SELECT valor from " + Constants.CONF_TABLE + " WHERE opcion = '" + Constants.REMO_TRUPITAS + "';";
+		sql ="SELECT " + Constants.FIELD_VALUE + " from " + Constants.CONF_TABLE 
+				+ " WHERE " + Constants.FIELD_OPTION + " = '" + Constants.REMO_TRUPITAS + "';";
 		error = "Error leyendo valor de configuracion: " + Constants.REMO_TRUPITAS;
 		valor = jdbc.queryForObject(sql, Integer.class);
 		conf.setTrupitaPenalty(valor);
 		
-		sql ="SELECT valor from " + Constants.CONF_TABLE + " WHERE opcion = '" + Constants.BONUS_POINTS + "';";
+		sql ="SELECT " + Constants.FIELD_VALUE + " from " + Constants.CONF_TABLE 
+				+ " WHERE " + Constants.FIELD_OPTION + " = '" + Constants.BONUS_POINTS + "';";
 		error = "Error leyendo valor de configuracion: " + Constants.BONUS_POINTS;
 		valor = jdbc.queryForObject(sql, Integer.class);
 		conf.setPointBonus(valor);
 		
-		sql ="SELECT valor from " + Constants.CONF_TABLE + " WHERE opcion = '" + Constants.STARTING_MONEY + "';";
+		sql ="SELECT " + Constants.FIELD_VALUE + " from " + Constants.CONF_TABLE 
+				+ " WHERE " + Constants.FIELD_OPTION + " = '" + Constants.STARTING_MONEY + "';";
 		error = "Error leyendo valor de configuracion: " + Constants.STARTING_MONEY;
 		valor = jdbc.queryForObject(sql, Integer.class);
 		conf.setStartingMoney(valor);
 		
-		sql ="SELECT valor from " + Constants.CONF_TABLE + " WHERE opcion = '" + Constants.MAX_PLAYERS + "';";
+		sql ="SELECT " + Constants.FIELD_VALUE + " from " + Constants.CONF_TABLE 
+				+ " WHERE " + Constants.FIELD_OPTION + " = '" + Constants.MAX_PLAYERS + "';";
 		error = "Error leyendo valor de configuracion: " + Constants.MAX_PLAYERS;
 		valor = jdbc.queryForObject(sql, Integer.class);
 		conf.setMaxPlayers(valor);
 		
-		sql ="SELECT valor from " + Constants.CONF_TABLE + " WHERE opcion = '" + Constants.MAX_PLAYERS_EACH_TEAM + "';";
+		sql ="SELECT " + Constants.FIELD_VALUE + " from " + Constants.CONF_TABLE 
+				+ " WHERE " + Constants.FIELD_OPTION + " = '" + Constants.MAX_PLAYERS_EACH_TEAM + "';";
 		error = "Error leyendo valor de configuracion: " + Constants.MAX_PLAYERS_EACH_TEAM;
 		valor = jdbc.queryForObject(sql, Integer.class);
 		conf.setMaxPlayersTeam(valor);
 		
-		sql ="SELECT valor from " + Constants.CONF_TABLE + " WHERE opcion = '" + Constants.NUM_COBRADORES_GENERAL + "';";
+		sql ="SELECT " + Constants.FIELD_VALUE + " from " + Constants.CONF_TABLE 
+				+ " WHERE " + Constants.FIELD_OPTION + " = '" + Constants.NUM_COBRADORES_GENERAL + "';";
 		error = "Error leyendo valor de configuracion: " + Constants.NUM_COBRADORES_GENERAL;
 		valor = jdbc.queryForObject(sql, Integer.class);
 		conf.setNumGeneralBonus(valor);
 		
-		sql ="SELECT valor from " + Constants.CONF_TABLE + " WHERE opcion = '" + Constants.NUM_TORPES_PAGADOS_POR_CICLO + "';";
+		sql ="SELECT " + Constants.FIELD_VALUE + " from " + Constants.CONF_TABLE 
+				+ " WHERE " + Constants.FIELD_OPTION + " = '" + Constants.NUM_TORPES_PAGADOS_POR_CICLO + "';";
 		error = "Error leyendo valor de configuracion: " + Constants.NUM_TORPES_PAGADOS_POR_CICLO;
 		valor = jdbc.queryForObject(sql, Integer.class);
 		conf.setMaxBonusCycle(valor);
 		
-		sql ="SELECT valor from " + Constants.CONF_TABLE + " WHERE opcion = '" + Constants.NUM_ROUNDS_CYCLE + "';";
+		sql ="SELECT " + Constants.FIELD_VALUE + " from " + Constants.CONF_TABLE 
+				+ " WHERE " + Constants.FIELD_OPTION + " = '" + Constants.NUM_ROUNDS_CYCLE + "';";
 		error = "Error leyendo valor de configuracion: " + Constants.NUM_ROUNDS_CYCLE;
 		valor = jdbc.queryForObject(sql, Integer.class);
 		conf.setNumRoundCycle(valor);
 		
-		sql ="SELECT valor from " + Constants.CONF_TABLE + " WHERE opcion = '" + Constants.STARTING_ROUND + "';";
+		sql ="SELECT " + Constants.FIELD_VALUE + " from " + Constants.CONF_TABLE 
+				+ " WHERE " + Constants.FIELD_OPTION + " = '" + Constants.STARTING_ROUND + "';";
 		error = "Error leyendo valor de configuracion: " + Constants.STARTING_ROUND;
 		valor = jdbc.queryForObject(sql, Integer.class);
 		conf.setInitialRound(valor.doubleValue());
 		
-		sql ="SELECT valor from " + Constants.CONF_TABLE + " WHERE opcion = '" + Constants.FINAL_ROUND + "';";
+		sql ="SELECT " + Constants.FIELD_VALUE + " from " + Constants.CONF_TABLE 
+				+ " WHERE " + Constants.FIELD_OPTION + " = '" + Constants.FINAL_ROUND + "';";
 		error = "Error leyendo valor de configuracion: " + Constants.FINAL_ROUND;
 		valor = jdbc.queryForObject(sql, Integer.class);
 		conf.setFinalRound(valor.doubleValue());
@@ -267,6 +284,38 @@ public List<Round> getStoredRounds(){
 		list = jdbc.query(sql, new BeanPropertyRowMapper<Participant>(Participant.class));
 		
 		return list;
+	}
+	
+	public ArrayList<String> checkStatusTeam(String nombre){
+		ArrayList<String> sanciones = new ArrayList<String>();
+		List<Player> list = null;
+		String error = "";
+		String sql ="SELECT * FROM " + Constants.PLAYERS_TABLE + " WHERE " + Constants.FIELD_OWNER 
+				+ " = '" + nombre + "' ORDER BY " + Constants.FIELD_TEAM + " ASC;";
+		
+		error = "Error database leyendo posibles sanciones - max players";
+		list = jdbc.query(sql, new BeanPropertyRowMapper<Player>(Player.class));
+		
+		if(list.size() > ComunioMethods.getConf().getMaxPlayers()){
+			sanciones.add(Constants.PENALTY_TYPES[0] + ": " + list.size());
+		}
+		String equipo = "";
+		Integer contador = 0;
+		for(Player player : list) {
+			if(player.getTeam().equals(equipo)) {
+				contador++;
+				if(contador > ComunioMethods.getConf().getMaxPlayersTeam()) {
+					sanciones.add(Constants.PENALTY_TYPES[1] + ": " + equipo);
+					break;
+				}						
+			}else {
+				equipo = player.getTeam();
+				contador = 1;
+			}
+		}
+		
+		
+		return sanciones;
 	}
 	
 }

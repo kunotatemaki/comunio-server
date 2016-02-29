@@ -1,23 +1,49 @@
 package com.rukiasoft.server.elpuntal.classes;
 
-public class Configuration {
+import java.io.Serializable;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+public class Configuration implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Expose@SerializedName("goal_bonus")
 	private Integer goalBonus;
+	@Expose@SerializedName("goalkeeper_bonus")
 	private Integer goalkeeperBonus;
+	@Expose@SerializedName("round_bonus")
 	private Integer roundBonus;
+	@Expose@SerializedName("general_bonus")
 	private Integer generalBonus;
+	@Expose@SerializedName("max_players_penalty")
 	private Integer maxPlayersPenalty;
+	@Expose@SerializedName("max_players_team_penalty")
 	private Integer maxPlayersTeamPenalty;
+	@Expose@SerializedName("point_bonus")
 	private Integer pointBonus;
+	@Expose@SerializedName("trupita")
 	private Integer trupitaPenalty;
+	@Expose@SerializedName("starting_money")
 	private Integer startingMoney;
+	@Expose@SerializedName("max_players")
 	private Integer maxPlayers;
+	@Expose@SerializedName("max_players_team")
 	private Integer maxPlayersTeam;
+	@Expose@SerializedName("num_general_bonus")
 	private Integer numGeneralBonus;
+	@Expose@SerializedName("num_bonus_cycle")
 	private Integer maxBonusCycle;
+	@Expose@SerializedName("num_rounds_cycle")
 	private Integer numRoundCycle;
+	@Expose@SerializedName("initial_round")
 	private Double initialRound;
+	@Expose@SerializedName("final_round")
 	private Double finalRound;
+	
 	public Integer getGoalBonus() {
 		return goalBonus;
 	}

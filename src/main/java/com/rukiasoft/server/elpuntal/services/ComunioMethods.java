@@ -6,6 +6,7 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.rukiasoft.server.elpuntal.classes.Configuration;
 import com.rukiasoft.server.elpuntal.classes.Log;
 import com.rukiasoft.server.elpuntal.classes.Participant;
@@ -18,7 +19,6 @@ import com.rukiasoft.server.elpuntal.database.ComunioDAOSQL;
 import com.rukiasoft.server.elpuntal.utils.Constants;
 import com.rukiasoft.server.elpuntal.utils.Tools;
 
-import ruler.elpuntal.comunio.server.classes.ComunioConstants;
 
 
 public class ComunioMethods {
@@ -116,29 +116,18 @@ public class ComunioMethods {
 		}
 		response.add(Constants.PENALTIES, jsonPenalties);
 		
-		responseX.put("sancionados", searchForRemo());
 		//configuraciones
 		JsonObject jsonConfiguration = new JsonObject();
 		Gson gson = new Gson();
-		response.addProperty(Constants.CONFIGURATION, getConf());
-		responseX.put(ComunioConstants.CURRENT_ROUND, getCurrentRound().getValor());
-		responseX.put(ComunioConstants.NEXT_ROUND, getNextRound().getValor());
-		responseX.put(ComunioConstants.START_ROUND, conf.getjInicial());
-		responseX.put(ComunioConstants.FINAL_ROUND, conf.getjFinal());
-		responseX.put(ComunioConstants.BONUS_GOAL, conf.getPrimaGol());
-		responseX.put(ComunioConstants.BONUS_GOALKEEPER, conf.getPrimaPortero());
-		responseX.put(ComunioConstants.BONUS_LAST_IN_ROUND, conf.getPrimaTorpeJornada());
-		responseX.put(ComunioConstants.BONUS_LAST_IN_CLASSIFICATION, conf.getPrimaTorpeGeneral());
-		responseX.put(ComunioConstants.REMO_MAX_PLAYERS, conf.getRemoMaxJugadores());
-		responseX.put(ComunioConstants.REMO_MAX_PLAYERS_PER_TEAM, conf.getRemoMaxJugadoresEquipo());
-		responseX.put(ComunioConstants.REMO_TRUPITAS, conf.getRemoTrupitas());
-		responseX.put(ComunioConstants.STARTING_MONEY, conf.getDineroInicial());
-		responseX.put(ComunioConstants.BONUS_POINTS, conf.getBonusPunto());
-		responseX.put(ComunioConstants.MAX_PLAYERS, conf.getMaxJugadores());
-		responseX.put(ComunioConstants.MAX_PLAYERS_EACH_TEAM, conf.getMaxJugadoresEquipo());
-		responseX.put(ComunioConstants.NUM_COBRADORES_GENERAL, conf.getnTorpesGeneral());
-		responseX.put(ComunioConstants.NUM_JORNADAS_QUE_FORMAN_UN_CICLO, conf.getnJornadasCiclo());
-		responseX.put(ComunioConstants.NUM_TORPES_PAGADOS_POR_CICLO, conf.getMaxTorpesCiclo());
+		String sJson = gson.toJson(getConf());
+		//jsonConfiguration = gson.fromJson(sJson, Configuration.class);
+		JsonParser parser = new JsonParser();
+		jsonConfiguration = (JsonObject) parser.parse(sJson);
+		response.add(Constants.FIELD_CONFIGURATION, jsonConfiguration);
+		response.addProperty(Constants.CURRENT_ROUND, getCurrentRound().getValue());
+		response.addProperty(Constants.NEXT_ROUND, getNextRound().getValue());
+		
+		response.add(Constants.FIELD_PENALIZED, searchForRemo());
 		
 			
 		
@@ -209,6 +198,21 @@ public class ComunioMethods {
 	 */
 	public Round getNextRound(){
 		return getComunioDAO().getNextRound();
+	}
+	
+	public JsonObject searchForRemo(){
+		JsonObject response = new JsonObject();
+		List<Participant> listParticipants = getParticipants();
+		for(Participant participant : listParticipants) {
+			ArrayList<String> sanciones = getComunioDAO().checkStatusTeam(participant.getName());
+			if(sanciones.size() > 0){
+				Tools mTools = new Tools();
+				JsonArray array = mTools.getJSONArrayFromArrayList(sanciones);
+				response.add(participant.getName(), array);
+			}
+		}
+		return response;
+		
 	}
 	
 

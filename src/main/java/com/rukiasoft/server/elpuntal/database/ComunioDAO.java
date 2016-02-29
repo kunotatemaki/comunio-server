@@ -1,5 +1,6 @@
 package com.rukiasoft.server.elpuntal.database;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.rukiasoft.server.elpuntal.classes.Configuration;
@@ -38,4 +39,6 @@ public interface ComunioDAO {
 	public List<Team> getTeams();
 	
 	public List<Participant> getGamersInformation();
+	
+	public ArrayList<String> checkStatusTeam(String nombre);
 }

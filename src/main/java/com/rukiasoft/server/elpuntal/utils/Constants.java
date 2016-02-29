@@ -9,6 +9,7 @@ public class Constants {
 	public static final String SIGNING_TABLE = "signings";
 	public static final String LOG_TABLE = "log";
 	public static final String TEAMS_TABLE = "teams";
+	public static final String PLAYERS_TABLE = "players";
 	
 	//fields json
 	public static final String FIELD_PARTICIPANTS = "participants";
@@ -17,7 +18,8 @@ public class Constants {
 	public static final String FIELD_LOGS = "logs";
 	public static final String FIELD_COMPUTER = "computer";
 	public static final String FIELD_TEAMS = "teams";
-	
+	public static final String FIELD_CONFIGURATION = "configuration";
+	public static final String FIELD_PENALIZED = "penalized";
 	
 	//fields tables
 	public static final String FIELD_CONF_TABLE_STATE = "state";
@@ -25,6 +27,10 @@ public class Constants {
 	public static final String FIELD_DATE = "date";
 	public static final String FIELD_ROUND = "round";
 	public static final String FIELD_NAME = "name";
+	public static final String FIELD_VALUE = "value";
+	public static final String FIELD_OPTION = "option_name";
+	public static final String FIELD_OWNER = "owner";
+	public static final String FIELD_TEAM = "team";
 	
 	
 	public static final Integer NO_BONUS = 0;
