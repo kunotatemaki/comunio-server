@@ -14,9 +14,12 @@ import com.rukiasoft.server.elpuntal.classes.Participant;
 import com.rukiasoft.server.elpuntal.classes.Round;
 import com.rukiasoft.server.elpuntal.classes.Score;
 import com.rukiasoft.server.elpuntal.classes.Signing;
+import com.rukiasoft.server.elpuntal.classes.Team;
 import com.rukiasoft.server.elpuntal.services.ComunioMethods;
 import com.rukiasoft.server.elpuntal.utils.Constants;
 import com.rukiasoft.server.elpuntal.utils.Tools;
+
+
 
 
 public class ComunioDAOSQL implements ComunioDAO{
@@ -219,7 +222,7 @@ public List<Round> getStoredRounds(){
 		return getRoundInformationByDate(table, null);
 	}
 	
-public List<Signing> getSigningInformation(String name){
+	public List<Signing> getSigningInformation(String name){
 		
 		List<Signing> list = null;
 		
@@ -236,13 +239,34 @@ public List<Signing> getSigningInformation(String name){
 	}
 
 	public List<Log> getLogs(){
-	List<Log> list = null;
-	
-	String sql = "SELECT * FROM " + Constants.LOG_TABLE + " ORDER BY " 
-			+ Constants.FIELD_DATE + " DESC;";
-
-	list = jdbc.query(sql, new BeanPropertyRowMapper<Log>(Log.class));
+		List<Log> list = null;
 		
-	return list;
-}
+		String sql = "SELECT * FROM " + Constants.LOG_TABLE + " ORDER BY " 
+				+ Constants.FIELD_DATE + " DESC;";
+	
+		list = jdbc.query(sql, new BeanPropertyRowMapper<Log>(Log.class));
+			
+		return list;
+	}
+	
+	public List<Team> getTeams(){
+		List<Team> list = null;
+		
+		//obtengo los nombres de los jugadores
+		String sql = "SELECT * FROM " + Constants.TEAMS_TABLE + "";
+		list = jdbc.query(sql, new BeanPropertyRowMapper<Team>(Team.class));
+		
+		return list;
+	}
+	
+	public List<Participant> getGamersInformation(){
+		List<Participant> list = null;
+		
+		//obtengo los nombres de los jugadores
+		String sql = "SELECT * FROM " + Constants.GAMERS_TABLE + " ORDER BY " + Constants.FIELD_NAME + " ASC;";
+		list = jdbc.query(sql, new BeanPropertyRowMapper<Participant>(Participant.class));
+		
+		return list;
+	}
+	
 }

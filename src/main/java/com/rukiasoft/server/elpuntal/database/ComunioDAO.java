@@ -2,14 +2,13 @@ package com.rukiasoft.server.elpuntal.database;
 
 import java.util.List;
 
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-
 import com.rukiasoft.server.elpuntal.classes.Configuration;
 import com.rukiasoft.server.elpuntal.classes.Log;
 import com.rukiasoft.server.elpuntal.classes.Participant;
 import com.rukiasoft.server.elpuntal.classes.Round;
 import com.rukiasoft.server.elpuntal.classes.Score;
 import com.rukiasoft.server.elpuntal.classes.Signing;
+import com.rukiasoft.server.elpuntal.classes.Team;
 
 
 
@@ -35,4 +34,8 @@ public interface ComunioDAO {
 	public List<Signing> getSigningInformation(String name);
 	
 	public List<Log> getLogs();
+	
+	public List<Team> getTeams();
+	
+	public List<Participant> getGamersInformation();
 }
