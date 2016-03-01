@@ -6,6 +6,32 @@
     getPageDataMethodName : "get_page_data",
     getParticipantsMethodName : "get_participants"
   }
+
+  var lenguaje = {
+      "thousands": ".",
+      "sProcessing":     "Procesando...",
+      "sLengthMenu":     "Mostrar _MENU_ registros",
+      "sZeroRecords":    "No se encontraron resultados",
+      "sEmptyTable":     "Ningún dato disponible en esta tabla",
+      "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+      "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+      "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+      "sInfoPostFix":    "",
+      "sSearch":         "Buscar:",
+      "sUrl":            "",
+      "sInfoThousands":  ",",
+      "sLoadingRecords": "Cargando...",
+      "oPaginate": {
+        "sFirst":    "Primero",
+        "sLast":     "Último",
+        "sNext":     "Siguiente",
+        "sPrevious": "Anterior"
+      },
+      "oAria": {
+        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+      }
+    };
   
   var serverCalls = {
     getParticipantsMethod : function($scope, $http) {
@@ -58,7 +84,7 @@
 
 
   var comunio = angular
-    .module('ComunioServer', ['ngMaterial', 'ngRoute', 'ngMdIcons' ])
+    .module('ComunioServer', ['ngMaterial', 'ngRoute', 'ngMdIcons', 'datatables', 'ngResource'])
     .controller('AppCtrl', function ($scope, $filter, $timeout, $mdSidenav, $log) {
       $scope.toggleLeft = buildDelayedToggler('left');
       $scope.toggleRight = buildToggler('right');
@@ -149,9 +175,31 @@
       serverCalls.getPageDataMethod($scope, $http);
       
     })
-    .controller('ClassificationController', function($scope) {
+    .controller('ClassificationTableCtrl', function ($scope, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+      var vm = this;
       
-      
+      vm.dtOptions = {
+        paginationType: 'full_numbers',
+        displayLength: $scope.activeParticipants.length,
+        paging: false,
+        stateSave: false,
+        scrollCollapse: false,
+        searching: false,
+        ordering:  true, 
+        "order": [[ 2, "desc" ]],
+        "jQueryUI":       true,
+        "language": lenguaje
+
+      };
+
+
+      vm.dtColumnDefs = [
+        DTColumnDefBuilder.newColumnDef(0).notSortable(),
+        DTColumnDefBuilder.newColumnDef(1).notSortable(),
+        DTColumnDefBuilder.newColumnDef(2), 
+        DTColumnDefBuilder.newColumnDef(3),
+        DTColumnDefBuilder.newColumnDef(4)
+      ];
     })
     ;
 

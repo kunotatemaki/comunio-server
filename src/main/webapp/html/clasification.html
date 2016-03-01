@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html>
-<body   ng-app="ComunioServer" ng-cloak>
+<body  ng-app="ComunioServer" ng-cloak>
 	
-	<div style='height:5%;'>
+	<div>
 		<label><b>Número de participantes activos: </b></label> {{ activeParticipants.length }}
 	</div>
-	<div style='height:95%;' ng-cloak>
-		<table id='classificationTable' class='display order-column compact stripe hover cell-border  texto-centrado'>
+	<div ng-controller="ClassificationTableCtrl as showCase"ng-cloak>
+		<table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="row-border hover">
 			<thead>
 				<tr>
-					<th class='no-sort'>Posición</th>
-					<th class='no-sort'>Nombre</th>
+					<th>Posición</th>
+					<th>Nombre</th>
 					<th>Puntuación Última Jornada</th>
 					<th>Puntuación General</th>
-					<th class='no-sort'>Dinero</th>
+					<th>Dinero</th>
 				</tr>
 			</thead>
-			<tbody id='classificationTableBody' ng-repeat="row in classification">
-				<tr>
-					<td align="center" valign="middle">{{ row.position }}</td>
+			<tbody>
+				<tr ng-repeat="row in classification">
+					<td align="center" valign="middle">{{$index + 1}}</td>
 					<td align="center" valign="middle">{{ row.name }}</td>
 					<td align="center" valign="middle">{{ row.roundPosition }}</td>
 					<td align="center" valign="middle">{{ row.generalPosition }}</td>

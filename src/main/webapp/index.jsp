@@ -6,22 +6,28 @@
  <meta equiv="Content-Type" content="text/html; charset=UTF-8">
   <!-- Angular Material style sheet -->
   	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+  	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
   	<link href="./css/comunioserver.css" type="text/css" rel="stylesheet">
 </head>
 <body ng-app="ComunioServer" ng-controller="GetPageData" ng-cloak>
   
   
   <!-- Angular Material requires Angular.js Libraries -->
-	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  	<script src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+  	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-route.js"></script> 
   	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
   	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
   	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+  	<script src="http:////ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-resource.js"></script>
   	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.6.0/angular-material-icons.min.js"></script>
 	
   	<!-- Angular Material Library -->
   	<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
   	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.6.0/angular-material-icons.min.js"></script>
+  	<script src="./js/angular-datatables.min.js"></script>
+	<link rel="stylesheet" href="./css/angular-datatables.css">
   	<script src="./js/comunioserver.js"></script>
   	
 	<h1 class="md-display-1">Hello World!</h1>
@@ -52,7 +58,7 @@
 	      							</md-content>
 	    						</md-sidenav>
 	    						<md-content flex layout-padding>
-	      							<div layout="column" layout-fill layout-align="top left" ng-controller="ClassificationController">
+	      							<div layout="column" layout-fill layout-align="top left">
 	        							<div>
 	          								<md-button class="md-raised md-primary" ng-click="toggleLeft()" class="md-primary" hide-gt-md>Toggle left</md-button>
 	        							</div>
