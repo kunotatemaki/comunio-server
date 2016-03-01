@@ -13,6 +13,7 @@ public class Constants {
 	
 	//fields json
 	public static final String FIELD_PARTICIPANTS = "participants";
+	public static final String FIELD_ACTIVE_PARTICIPANTS = "active_participants";
 	public static final String FIELD_SCORES = "scores";
 	public static final String FIELD_SIGNINGS = "signings";
 	public static final String FIELD_LOGS = "logs";

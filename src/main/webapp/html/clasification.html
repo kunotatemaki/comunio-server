@@ -1,10 +1,49 @@
 <!DOCTYPE html>
 <html>
-<body>
-
-	<h1>clasificacion fragment</h1>
-
-	<p>My first paragraph.</p>
-
+<body   ng-app="ComunioServer" ng-cloak>
+	
+	<div style='height:5%;'>
+		<label><b>Número de participantes activos: </b></label> {{ activeParticipants.length }}
+	</div>
+	<div style='height:95%;' ng-cloak>
+		<table id='classificationTable' class='display order-column compact stripe hover cell-border  texto-centrado'>
+			<thead>
+				<tr>
+					<th class='no-sort'>Posición</th>
+					<th class='no-sort'>Nombre</th>
+					<th>Puntuación Última Jornada</th>
+					<th>Puntuación General</th>
+					<th class='no-sort'>Dinero</th>
+				</tr>
+			</thead>
+			<tbody id='classificationTableBody' ng-repeat="row in classification">
+				<tr>
+					<td align="center" valign="middle">{{ row.position }}</td>
+					<td align="center" valign="middle">{{ row.name }}</td>
+					<td align="center" valign="middle">{{ row.roundPosition }}</td>
+					<td align="center" valign="middle">{{ row.generalPosition }}</td>
+					<td align="center" valign="middle">{{ row.money }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<br><br>
+	<div ng-cloak>
+		<md-toolbar class="md-theme-light">
+    		<h2 class="md-toolbar-tools">
+      			<span>Últimas operaciones realizadas</span>
+    		</h2>
+  		</md-toolbar>
+		<md-content>
+    		<md-list>
+      			<md-list-item class="md-1-line" ng-repeat="log in logs">
+       				<div>
+       					<p><b>{{ log.date }}:</b> {{ log.operation }}</p>
+        			</div>
+        			<md-divider ng-if="!$last"></md-divider>
+      			</md-list-item>
+      		</md-list>
+      	</md-content>
+	</div>
 </body>
 </html>

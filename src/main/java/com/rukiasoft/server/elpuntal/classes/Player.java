@@ -1,11 +1,19 @@
 package com.rukiasoft.server.elpuntal.classes;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Player {
 
+	@Expose@SerializedName("name")
 	private String name;
+	@Expose@SerializedName("position")
 	private String position;
+	@Expose@SerializedName("team")
 	private String team;
+	@Expose@SerializedName("owner")
 	private String owner;
+	
 	public String getName() {
 		return name;
 	}

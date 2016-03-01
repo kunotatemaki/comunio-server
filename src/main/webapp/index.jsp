@@ -52,7 +52,7 @@
 	      							</md-content>
 	    						</md-sidenav>
 	    						<md-content flex layout-padding>
-	      							<div layout="column" layout-fill layout-align="top left">
+	      							<div layout="column" layout-fill layout-align="top left" ng-controller="ClassificationController">
 	        							<div>
 	          								<md-button class="md-raised md-primary" ng-click="toggleLeft()" class="md-primary" hide-gt-md>Toggle left</md-button>
 	        							</div>

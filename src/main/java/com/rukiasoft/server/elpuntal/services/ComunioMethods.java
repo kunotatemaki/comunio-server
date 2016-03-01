@@ -3,6 +3,7 @@ package com.rukiasoft.server.elpuntal.services;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -18,6 +19,7 @@ import com.rukiasoft.server.elpuntal.database.ComunioDAO;
 import com.rukiasoft.server.elpuntal.database.ComunioDAOSQL;
 import com.rukiasoft.server.elpuntal.utils.Constants;
 import com.rukiasoft.server.elpuntal.utils.Tools;
+
 
 
 
@@ -69,15 +71,20 @@ public class ComunioMethods {
 		JsonArray jsonParticipants = mTools.getJSONArrayFromArrayList(listParticipants);
 		response.add(Constants.FIELD_PARTICIPANTS, jsonParticipants);
 		
+		//Participantes activos
+		List<Participant> listActiveParticipants = getActiveParticipantsInformation(getCurrentRound().getValue());
+		JsonArray jsonActiveParticipants = mTools.getJSONArrayFromArrayList(listActiveParticipants);
+		response.add(Constants.FIELD_ACTIVE_PARTICIPANTS, jsonActiveParticipants);
+		
 		//puntuaciones
-		JsonArray jsonArrayScores = new JsonArray();
-		for(int i=0; i<listParticipants.size(); i++) {
-			List<Score> listPuntuacion = getRoundInformation(listParticipants.get(i), Constants.ALL_ROUNDS);
-			JsonObject jsonScoreParticipant = mTools.getJSONObjectFromArrayList(listParticipants.get(i).getTableName(),
-					listPuntuacion);
-			jsonArrayScores.add(jsonScoreParticipant);
+		JsonObject jsonScores = new JsonObject();
+		for(Participant participant : listParticipants) {
+			List<Score> listPuntuacion = getRoundInformation(participant, Constants.ALL_ROUNDS);
+			JsonArray jsonArrayScores = new JsonArray();
+			jsonArrayScores = mTools.getJSONArrayFromArrayList(listPuntuacion);
+			jsonScores.add(participant.getName(), jsonArrayScores);
 		}
-		response.add(Constants.FIELD_SCORES, jsonArrayScores);
+		response.add(Constants.FIELD_SCORES, jsonScores);
 		
 		//Fichajes
 		List<Signing> signings = getComunioDAO().getSigningInformation(Constants.ALL_SIGNINGS);
@@ -215,5 +222,20 @@ public class ComunioMethods {
 		
 	}
 	
+	private List<Participant> getActiveParticipantsInformation(String jornada){
+		Double nJornada = Double.parseDouble(jornada);		
+		return getActiveParticipantsInformation(nJornada);
+	}
+	
+	private List<Participant> getActiveParticipantsInformation(Double jornada){
+		List<Participant> list = getComunioDAO().getGamersInformation();
+		List<Participant> activeList = new ArrayList<Participant>();
+		for(Participant participant : list) {
+			if(participant.getLastRound() >= jornada && participant.getFirstRound() <= jornada) {
+				activeList.add(participant);
+			}
+		}
+		return activeList;
+	}
 
 }

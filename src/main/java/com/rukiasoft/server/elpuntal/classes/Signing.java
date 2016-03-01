@@ -1,13 +1,23 @@
 package com.rukiasoft.server.elpuntal.classes;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Signing {
 
+	@Expose@SerializedName("id")
 	private Integer Id;
+	@Expose@SerializedName("name")
 	private String name;
+	@Expose@SerializedName("buyer")
 	private String buyer;
+	@Expose@SerializedName("seller")
 	private String seller;
+	@Expose@SerializedName("prize")
 	private Integer prize;
+	@Expose@SerializedName("round")
 	private Double round;
+	
 	public Integer getId() {
 		return Id;
 	}

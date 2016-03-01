@@ -4,12 +4,20 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Log {
 
+	@Expose@SerializedName("id")
 	private Integer Id;
+	@Expose@SerializedName("operation")
 	private String operation;
+	@Expose@SerializedName("date")
 	private Date date;
+	@Expose@SerializedName("string_date")
 	private String sDate;
+	
 	public Integer getId() {
 		return Id;
 	}

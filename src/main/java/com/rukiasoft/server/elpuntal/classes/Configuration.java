@@ -1,16 +1,10 @@
 package com.rukiasoft.server.elpuntal.classes;
 
-import java.io.Serializable;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Configuration implements Serializable{
+public class Configuration{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	@Expose@SerializedName("goal_bonus")
 	private Integer goalBonus;
 	@Expose@SerializedName("goalkeeper_bonus")

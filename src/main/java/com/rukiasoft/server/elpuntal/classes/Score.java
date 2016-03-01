@@ -1,34 +1,59 @@
 package com.rukiasoft.server.elpuntal.classes;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.rukiasoft.server.elpuntal.services.ComunioMethods;
 import com.rukiasoft.server.elpuntal.utils.Constants;
 
 public class Score{
 	
+	@Expose@SerializedName("id")
 	private Integer Id = null;
+	@Expose@SerializedName("table_name")
 	private String tableName = null;
+	@Expose@SerializedName("name")
 	private String name = null;
+	@Expose@SerializedName("round")
 	private Double round = null;
+	@Expose@SerializedName("round_score")
 	private Integer roundScore = null;
+	@Expose@SerializedName("round_position")
 	private Integer roundPosition = null;
+	@Expose@SerializedName("general_score")
 	private Integer generalScore = null;
+	@Expose@SerializedName("general_position")
 	private Integer generalPosition = null;
 	
+	@Expose@SerializedName("published")
 	private Boolean published = false;
+	@Expose@SerializedName("goals")
 	private Integer goals = 0;
+	@Expose@SerializedName("goalkeeper")
 	private Boolean goalkeeper = false;
+	@Expose@SerializedName("team_penalty")
 	private Boolean teamPenalty = false;
+	@Expose@SerializedName("player_penalty")
 	private Boolean playerPenalty = false;
+	@Expose@SerializedName("trupita_penalty")
 	private Boolean trupitaPenalty = false;
+	@Expose@SerializedName("round_bonus")
 	private Boolean roundBonus = false;
+	@Expose@SerializedName("general_bonus")
 	private Integer generalBonus = 0;
 	
+	@Expose@SerializedName("round_bonus_money")
 	private Integer roundBonusMoney = 0;
+	@Expose@SerializedName("general_bonus_money")
 	private Integer generalBonusMoney = 0;
+	@Expose@SerializedName("goals_money")
 	private Integer goalsMoney = 0;
+	@Expose@SerializedName("goalkeeper_money")
 	private Integer goalkeeperMoney = 0;
+	@Expose@SerializedName("team_penalty_money")
 	private Integer teamPenaltyMoney = 0;
+	@Expose@SerializedName("player_penalty_money")
 	private Integer playerPenaltyMoney = 0;
+	@Expose@SerializedName("trupita_penalty_money")
 	private Integer trupitaPenaltyMoney = 0;
 	
 	

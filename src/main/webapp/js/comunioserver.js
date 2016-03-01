@@ -15,6 +15,7 @@
         .then(function(response) {
             //First function handles success
           $scope.participants = response.data.participants;
+         
         }, function(response) {
           //Second function handles error
           $scope.content = "Something went wrong";
@@ -27,12 +28,32 @@
         .then(function(response) {
             //First function handles success
           $scope.participants = response.data.participants;
+          $scope.classification = getClassificationFromResponse(response.data);
+          $scope.activeParticipants = response.data.active_participants;
+          $scope.logs = response.data.logs;
+
         }, function(response) {
           //Second function handles error
           $scope.content = "Something went wrong";
         });
       }
 
+  }
+
+  function getClassificationFromResponse(data){
+    var activeParticipants = data.active_participants;
+    var classification = new Array();
+    for(var i=0; i<activeParticipants.length; i++){
+      var score = data.scores[activeParticipants[i].name][data.current_round - 1];
+      var row = {};
+      row.position = i+1;
+      row.name = activeParticipants[i].name;
+      row.roundPosition = score.round_position;
+      row.generalPosition = score.general_position;
+      row.money = 0;
+      classification[i] = row;
+    }
+    return classification;
   }
 
 
@@ -125,8 +146,13 @@
       };
     })
     .controller('GetPageData', function($scope, $http) {
-      serverCalls.getParticipants($scope, $http);
+      serverCalls.getPageDataMethod($scope, $http);
       
-    });
+    })
+    .controller('ClassificationController', function($scope) {
+      
+      
+    })
+    ;
 
 })();
