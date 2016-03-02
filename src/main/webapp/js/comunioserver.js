@@ -74,8 +74,8 @@
       var row = {};
       row.position = i+1;
       row.name = activeParticipants[i].name;
-      row.roundPosition = score.round_position;
-      row.generalPosition = score.general_position;
+      row.roundScore = score.round_score;
+      row.generalScore = score.general_score;
       row.money = 0;
       classification[i] = row;
     }
@@ -178,6 +178,7 @@
     .controller('ClassificationTableCtrl', function ($scope, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
       var vm = this;
       
+      
       vm.dtOptions = {
         paginationType: 'full_numbers',
         displayLength: $scope.activeParticipants.length,
@@ -186,20 +187,22 @@
         scrollCollapse: false,
         searching: false,
         ordering:  true, 
-        "order": [[ 2, "desc" ]],
+        "order": [[ 2, "desc"]],
         "jQueryUI":       true,
         "language": lenguaje
 
       };
 
-
       vm.dtColumnDefs = [
         DTColumnDefBuilder.newColumnDef(0).notSortable(),
-        DTColumnDefBuilder.newColumnDef(1).notSortable(),
-        DTColumnDefBuilder.newColumnDef(2), 
-        DTColumnDefBuilder.newColumnDef(3),
-        DTColumnDefBuilder.newColumnDef(4)
+        DTColumnDefBuilder.newColumnDef(1), 
+        DTColumnDefBuilder.newColumnDef(2),
+        DTColumnDefBuilder.newColumnDef(3)
       ];
+
+
+     
+
     })
     ;
 

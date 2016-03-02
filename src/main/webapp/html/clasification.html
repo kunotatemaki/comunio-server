@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
-<body  ng-app="ComunioServer" ng-cloak>
+<body  ng-app="ComunioServer" classification-table ng-cloak>
 	
 	<div>
 		<label><b>Número de participantes activos: </b></label> {{ activeParticipants.length }}
 	</div>
-	<div ng-controller="ClassificationTableCtrl as showCase"ng-cloak>
-		<table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="row-border hover">
+	<div ng-controller="ClassificationTableCtrl as showCase" ng-cloak>
+		
+		<table  datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="row-border hover">
 			<thead>
 				<tr>
-					<th>Posición</th>
+					<!-- <th>Posición</th> -->
 					<th>Nombre</th>
 					<th>Puntuación Última Jornada</th>
 					<th>Puntuación General</th>
@@ -18,10 +19,10 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="row in classification">
-					<td align="center" valign="middle">{{$index + 1}}</td>
+					<!-- <td align="center" valign="middle">{{$index + 1}}</td> -->
 					<td align="center" valign="middle">{{ row.name }}</td>
-					<td align="center" valign="middle">{{ row.roundPosition }}</td>
-					<td align="center" valign="middle">{{ row.generalPosition }}</td>
+					<td align="center" valign="middle">{{ row.roundScore }}</td>
+					<td align="center" valign="middle">{{ row.generalScore }}</td>
 					<td align="center" valign="middle">{{ row.money }}</td>
 				</tr>
 			</tbody>
