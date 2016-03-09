@@ -80,15 +80,34 @@ public class ComunioMethods {
 		JsonObject jsonScores = new JsonObject();
 		for(Participant participant : listParticipants) {
 			List<Score> listPuntuacion = getRoundInformation(participant, Constants.ALL_ROUNDS);
+			for(int i=0; i<listPuntuacion.size(); i++){
+				listPuntuacion.get(i).setGeneralScoreAssigned(200);
+			}
 			JsonArray jsonArrayScores = new JsonArray();
 			jsonArrayScores = mTools.getJSONArrayFromArrayList(listPuntuacion);
-			jsonScores.add(participant.getName(), jsonArrayScores);
+			jsonScores.add(participant.getTableName(), jsonArrayScores);
 		}
 		response.add(Constants.FIELD_SCORES, jsonScores);
 		
 		//Fichajes
-		List<Signing> signings = getComunioDAO().getSigningInformation(Constants.ALL_SIGNINGS);
+		/*List<Signing> signings = getComunioDAO().getSigningInformation(Constants.ALL_SIGNINGS);
 		JsonArray jsonSignings = mTools.getJSONArrayFromArrayList(signings);
+		response.add(Constants.FIELD_SIGNINGS, jsonSignings);*/
+		
+		//Fichajes
+		JsonObject jsonSignings = new JsonObject();
+		for(Participant participant : listParticipants) {
+			JsonObject jsonGamerSignings = new JsonObject();
+			List<Signing> purchases = getComunioDAO().getSigningInformationByGamer(participant.getName(), Constants.BUYER);
+			List<Signing> sales = getComunioDAO().getSigningInformationByGamer(participant.getName(), Constants.SELLER);
+			JsonArray jsonArrayPurchases = new JsonArray();
+			JsonArray jsonArraySales = new JsonArray();
+			jsonArrayPurchases = mTools.getJSONArrayFromArrayList(purchases);
+			jsonArraySales = mTools.getJSONArrayFromArrayList(sales);
+			jsonGamerSignings.add(Constants.FIELD_PURCHASES, jsonArrayPurchases);
+			jsonGamerSignings.add(Constants.FIELD_SALES, jsonArraySales);
+			jsonSignings.add(participant.getTableName(), jsonGamerSignings);
+		}
 		response.add(Constants.FIELD_SIGNINGS, jsonSignings);
 		
 		//Logs

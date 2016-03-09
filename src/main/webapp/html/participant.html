@@ -1,10 +1,99 @@
 <!DOCTYPE html>
 <html>
-<body>
-
-	<h1>participant fragment</h1>
-
-	<p>My first paragraph.</p>
-
+<body  ng-app="ComunioServer" ng-cloak>
+	<div ng-controller="SpecificTableCtrl as specific" ng-cloak>
+		<div>
+			<b>Dinero: </b><label ng-class="{'positive-money': participant.money>=1000000, 'negative-money': participant.money<0, 'intermediate-money': participant.money>=0 && participant.money<1000000}">{{ participant.money = configuration.starting_money + participant.starting_bonus + participant.gameMoney.goals + participant.gameMoney.goalkeeper + participant.gameMoney.torpeJornada + participant.gameMoney.torpeGeneral - participant.gameMoney.remoJugadores - participant.gameMoney.remoEquipos - participant.gameMoney.remoTrupitas - participant.purchasesMoney + participant.salesMoney + (points * configuration.point_bonus) | currency:"€":0 }}</label>
+			<br>
+			<b>Prima inicial: </b><label  ng-class="{'positive-money': participant.starting_bonus>=0}">{{ participant.starting_bonus | currency:"€":0 }}</label>
+		</div>
+		<div >
+			<table  datatable="ng" dt-options="specific.dtOptions" class="row-border hover compact stripe">
+				<thead>
+					<tr>
+						<th rowspan=2>Jornada</th>
+						<th rowspan=2>Puntuación Jornada</th>
+						<th rowspan=2>Posición Jornada</th>
+						<th rowspan=2>Puntuación General</th>
+						<th rowspan=2>Posición General</th>
+						<th colspan=5>PRIMAS</th>
+						<th colspan=3>REMOS</th>
+					</tr>
+					<tr>
+						<th>Goles</th>
+						<th>Portería a cero</th>
+						<th>Torpe de la Jornada</th>
+						<th>Torpe de la General</th>
+						<th>Prima especial</th>
+						<th>Jugadores</th>
+						<th>Equipos</th>
+						<th>Trúpitas</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="score in scores">
+						<td align="center" valign="middle">{{ score.round }}</td> 
+						<td align="center" valign="middle">{{ score.round_score }}</td>
+						<td align="center" valign="middle">{{ score.round_position }}</td>
+						<td align="center" valign="middle">{{ score.general_score }}</td>
+						<td align="center" valign="middle">{{ score.general_position }}</td>
+						<td align="center" valign="middle">{{ score.goals * goalsBonus | currency:"€":0}}</td>
+						<td align="center" valign="middle">{{ score.goalkeeper * goalkeeperBonus | currency:"€":0}}</td>
+						<td align="center" valign="middle">{{ score.round_bonus? roundBonus : 0 | currency:"€":0}}</td>
+						<td align="center" valign="middle" ng-class="{'positive-money': score.general_bonus==1, 'negative-money': score.general_bonus==2}">{{ score.general_bonus == 1? generalBonus :0 | currency:"€":0}}</td>
+						<td align="center" valign="middle">{{ score.special_bonus | currency:"€":0 }}</td>
+						<td align="center" valign="middle">{{ score.player_penalty? maxPlayersPenalty : 0 | currency:"€":0}}</td>
+						<td align="center" valign="middle">{{ score.team_penalty? maxPlayersTeamPenalty : 0 | currency:"€":0}}</td>
+						<td align="center" valign="middle">{{ score.trupita_penalty? trupita : 0 | currency:"€":0}}</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th style='text-align:left;' colspan='5'>Dinero por puntos: <label>{{ points * configuration.point_bonus  | currency:"€":0}}</label></th>
+						<th style='text-align:right' ><label>{{ participant.gameMoney.goals  | currency:"€":0}}</label></th>
+						<th style='text-align:right' ><label>{{ participant.gameMoney.goalkeeper  | currency:"€":0}}</label></th>
+						<th style='text-align:right' ><label>{{ participant.gameMoney.torpeJornada  | currency:"€":0}}</label></th>
+						<th style='text-align:right' ><label>{{ participant.gameMoney.torpeGeneral  | currency:"€":0}}</label></th>
+						<th style='text-align:right' ><label>{{ participant.gameMoney.remoJugadores  | currency:"€":0}}</label></th>
+						<th style='text-align:right' ><label>{{ participant.gameMoney.remoEquipos  | currency:"€":0}}</label></th>
+						<th style='text-align:right' ><label>{{ participant.gameMoney.remoTrupitas  | currency:"€":0}}</label></th>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		<br><br>
+		<div width=50%;>
+			<h2><b>Histórico de Fichajes</b></h2>
+			</br>
+			<table  datatable="ng" dt-options="specific.dtOptions" class="row-border hover compact stripe">
+				<thead align='center'>
+					<tr align='center'>
+						<th colspan=2>Compra</th>
+						<th colspan=2>Venta</th>
+					</tr>
+					<tr align='center'>
+						<th>Nombre</th>
+						<th>Precio</th>
+						<th>Nombre</th>
+						<th>Precio</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="t in getTimes() track by $index">
+						<td align="center" valign="middle">{{ $index < signings.purchases.length? signings.purchases[$index].name : "" }}</td>
+						<td align="center" valign="middle">{{ $index < signings.purchases.length? signings.purchases[$index].prize : "" | currency:"€":0}}</th>
+						<td align="center" valign="middle">{{ $index < signings.sales.length? signings.sales[$index].name : "" }}</th>
+						<td align="center" valign="middle">{{ $index < signings.sales.length? signings.sales[$index].prize : ""  | currency:"€":0}}</th>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th colspan='2' style='text-align:right'>Total: <label>{{ participant.purchasesMoney  | currency:"€":0}}</label></th>
+						<th colspan='2' style='text-align:right' >Total: <label>{{ participant.salesMoney  | currency:"€":0}}</label></th>        
+					</tr>
+				</tfoot>
+			</table>
+		</div>		
+	</div>
 </body>
 </html>

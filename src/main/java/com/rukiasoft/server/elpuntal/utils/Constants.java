@@ -21,6 +21,8 @@ public class Constants {
 	public static final String FIELD_TEAMS = "teams";
 	public static final String FIELD_CONFIGURATION = "configuration";
 	public static final String FIELD_PENALIZED = "penalized";
+	public static final String FIELD_PURCHASES = "purchases";
+	public static final String FIELD_SALES = "sales";
 	
 	//fields tables
 	public static final String FIELD_CONF_TABLE_STATE = "state";
@@ -32,6 +34,9 @@ public class Constants {
 	public static final String FIELD_OPTION = "option_name";
 	public static final String FIELD_OWNER = "owner";
 	public static final String FIELD_TEAM = "team";
+	public static final String FIELD_SELLER = "seller";
+	public static final String FIELD_BUYER = "buyer";
+	public static final String FIELD_PRIZE = "prize";
 	
 	
 	public static final Integer NO_BONUS = 0;
@@ -62,6 +67,8 @@ public class Constants {
 	public static final String PENALTIES = "penalties";
 	public static final String[] PENALTY_TYPES = {"Máximo número de Jugadores","Máximo de jugadores por equipo","Trúpitas", "Prima"};
 	
+	public static final int SELLER = 0;
+	public static final int BUYER = 1;
 	
 	
 	public static final String MAX_PLAYERS = "max_players";

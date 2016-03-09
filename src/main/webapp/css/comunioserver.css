@@ -23,3 +23,18 @@
   color: saddlebrown;
   font-size: 0.9em; }
 
+  .positive-money{
+    color: green;
+    font-weight: bold;
+  }
+
+  .negative-money{
+    color: red;
+    font-weight: bold;
+  }
+
+  .intermediate-money{
+    color: orange;
+    font-weight: bold;
+  }
+

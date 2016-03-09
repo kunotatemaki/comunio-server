@@ -7,9 +7,10 @@
   <!-- Angular Material style sheet -->
   	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
   	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
-  	<link href="./css/comunioserver.css" type="text/css" rel="stylesheet">
+  	<!-- <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css"> -->
+ 	<link href="./css/comunioserver.css" type="text/css" rel="stylesheet">
 </head>
-<body ng-app="ComunioServer" ng-controller="GetPageData" ng-cloak>
+<body ng-app="ComunioServer" ng-controller="GetPageDataCtrl as gpdf" ng-cloak>
   
   
   <!-- Angular Material requires Angular.js Libraries -->
@@ -27,6 +28,7 @@
   	<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
   	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.6.0/angular-material-icons.min.js"></script>
   	<script src="./js/angular-datatables.min.js"></script>
+  	<script src="https://code.angularjs.org/1.2.5/i18n/angular-locale_es-es.js"></script>
 	<link rel="stylesheet" href="./css/angular-datatables.css">
   	<script src="./js/comunioserver.js"></script>
   	
@@ -36,22 +38,22 @@
   		<md-content>
     		<md-tabs md-dynamic-height md-border-bottom>
       			<md-tab label="one">
-			        <md-content ng-controller="AppCtrl" class="md-padding">
-				       	<h1 class="md-display-2">{{ displayedPlayer }}</h1>
+			        <md-content ng-controller="TabOneCtrl as tabone" class="md-padding">
+				       	<h1 class="md-display-2">{{ gpdf.displayedPlayer }}</h1>
 						<div layout="column" style="height:100%;" ng-cloak>
 	  						<section layout="row" flex>
-	    						<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-	      							<md-toolbar layout="row" class="md-theme-indigo" ng-controller="LeftCtrl">
-	        							<md-button flex="10" ng-click="close()" class="md-primary" hide-gt-md>
+	    						<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" >
+	      							<md-toolbar layout="row" class="md-theme-indigo" ng-controller="SidenavCtrl as sidenav">
+	        							<md-button flex="10" ng-click="sidenav.close()" class="md-primary" >
 	          								<ng-md-icon icon="arrow_back" style="fill: white"></ng-md-icon>
 	        							</md-button>
 	        							<h1 flex class="md-toolbar-tools">Sidenav Left</h1>
 	      							</md-toolbar>
 	      							<md-content layout-padding>
-	        							<p>Selected Value: <span class="radioValue">{{ selectedPlayer }}</span> </p>
-									    <md-radio-group ng-model="selectedPlayer">
-									    	<md-radio-button value="{{ clasificationOption.option }}" class="md-primary">{{ clasificationOption.display }}</md-radio-button>
-									    	<div ng-repeat="participant in participants">
+	        							<p>Selected Value: <span class="radioValue">{{ gpdf.selectedPlayer }}</span> </p>
+									    <md-radio-group ng-model="gpdf.selectedPlayer">
+									    	<md-radio-button value="{{ gpdf.clasificationOption.option }}" class="md-primary">{{ gpdf.clasificationOption.display }}</md-radio-button>
+									    	<div ng-repeat="participant in gpdf.participants">
 									      		<md-radio-button value="{{ participant.table_name }}">{{ participant.name }}</md-radio-button>
 									    	</div>
 									    </md-radio-group>
@@ -60,9 +62,9 @@
 	    						<md-content flex layout-padding>
 	      							<div layout="column" layout-fill layout-align="top left">
 	        							<div>
-	          								<md-button class="md-raised md-primary" ng-click="toggleLeft()" class="md-primary" hide-gt-md>Toggle left</md-button>
+	          								<md-button class="md-raised md-primary" ng-click="tabone.toggleLeft()" class="md-primary" >Toggle left</md-button>
 	        							</div>
-	        							<div class="slide-animate" ng-include="template.url"></div>
+	        							<div class="slide-animate" ng-include="gpdf.template.url"></div>
 	      							</div>
 	      							<div flex></div>
 	    						</md-content>

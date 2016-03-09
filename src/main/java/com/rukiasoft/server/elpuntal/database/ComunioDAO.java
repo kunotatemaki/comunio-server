@@ -34,6 +34,8 @@ public interface ComunioDAO {
 	
 	public List<Signing> getSigningInformation(String name);
 	
+	public List<Signing> getSigningInformationByGamer(String name, int type);
+	
 	public List<Log> getLogs();
 	
 	public List<Team> getTeams();

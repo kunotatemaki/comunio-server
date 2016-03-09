@@ -1,50 +1,54 @@
 <!DOCTYPE html>
 <html>
-<body  ng-app="ComunioServer" classification-table ng-cloak>
-	
-	<div>
-		<label><b>Número de participantes activos: </b></label> {{ activeParticipants.length }}
-	</div>
-	<div ng-controller="ClassificationTableCtrl as showCase" ng-cloak>
-		
-		<table  datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="row-border hover">
-			<thead>
-				<tr>
-					<!-- <th>Posición</th> -->
-					<th>Nombre</th>
-					<th>Puntuación Última Jornada</th>
-					<th>Puntuación General</th>
-					<th>Dinero</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="row in classification">
-					<!-- <td align="center" valign="middle">{{$index + 1}}</td> -->
-					<td align="center" valign="middle">{{ row.name }}</td>
-					<td align="center" valign="middle">{{ row.roundScore }}</td>
-					<td align="center" valign="middle">{{ row.generalScore }}</td>
-					<td align="center" valign="middle">{{ row.money }}</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<br><br>
-	<div ng-cloak>
-		<md-toolbar class="md-theme-light">
-    		<h2 class="md-toolbar-tools">
-      			<span>Últimas operaciones realizadas</span>
-    		</h2>
-  		</md-toolbar>
-		<md-content>
-    		<md-list>
-      			<md-list-item class="md-1-line" ng-repeat="log in logs">
-       				<div>
-       					<p><b>{{ log.date }}:</b> {{ log.operation }}</p>
-        			</div>
-        			<md-divider ng-if="!$last"></md-divider>
-      			</md-list-item>
-      		</md-list>
-      	</md-content>
+<body  ng-app="ComunioServer" ng-cloak>
+	<div ng-controller="ClassificationTableCtrl as ctable" ng-cloak>
+		<div>
+			<label><b>Número de participantes activos: {{ activeParticipants.length }}</b></label>
+			<br>
+		</div>
+		<div >
+			<table  datatable="ng" dt-options="ctable.dtOptions" dt-column-defs="ctable.dtColumnDefs" class="cell-border order-column compact hover stripe">
+				<thead>
+					<tr>
+						<!-- <th>Posición</th> -->
+						<th>Nombre</th>
+						<th>Puntuación Última Jornada</th>
+						<th>Puntuación General</th>
+						<th>Dinero</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="row in classification">
+						<!-- <td align="center" valign="middle">{{$index + 1}}</td> -->
+						<td align="center" valign="middle">{{ row.name }}</td>
+						<td align="center" valign="middle">{{ row.roundScore }}</td>
+						<td align="center" valign="middle">{{ row.generalScore }}</td>
+						<td align="right" valign="middle" ng-class="{'positive-money': row.money>=1000000, 'negative-money': row.money<0, 'intermediate-money': row.money>=0 && row.money<1000000}">{{ row.money = configuration.starting_money + row.generalScoreAssigned + row.salesMoney - row.purchasesMoney + row.gameMoney.goals + row.gameMoney.goalkeeper + row.gameMoney.torpeJornada + row.gameMoney.torpeGeneral - row.gameMoney.remoJugadores - row.gameMoney.remoEquipos - row.gameMoney.remoTrupitas + row.gameMoney.specialBonus | currency:"€":0 }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<br><br>
+		<div ng-cloak>
+			<md-toolbar class="md-theme-light">
+				<h2 class="md-toolbar-tools">
+	      			<span>Últimas operaciones realizadas</span>
+	    		</h2>
+	  		</md-toolbar>
+			<md-content>
+	    		<md-list>
+	      			<md-list-item class="md-1-line" ng-repeat="log in logs | limitTo:maxLogs">
+	       				<div>
+	       					<p><b>{{ log.date }}:</b> {{ log.operation }}</p>
+	        			</div>
+	        			<md-divider ng-if="!$last"></md-divider>
+	      			</md-list-item>
+	      		</md-list>
+	      	</md-content>
+		</div>
+		<div ng-cloak>
+			<md-button class="md-raised md-primary" ng-click="noLimits()" class="md-primary" ng-hide="logsShowed()">Mostrar todos</md-button>
+		</div>
 	</div>
 </body>
 </html>

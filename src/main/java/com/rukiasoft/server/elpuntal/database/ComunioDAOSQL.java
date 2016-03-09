@@ -229,9 +229,6 @@ public List<Round> getStoredRounds(){
 		sql += " ORDER BY " + Constants.FIELD_ROUND + " ASC;";
 		list= jdbc.query(sql, new BeanPropertyRowMapper<Score>(Score.class));
 		
-		for(int i=0; i<list.size(); i++) {
-			list.get(i).setTableName(table);
-		}
 		return list;
 	}
 	
@@ -249,6 +246,26 @@ public List<Round> getStoredRounds(){
 					+ Constants.FIELD_DATE + " DESC;";
 		}else
 			sql +=  " ORDER BY " + Constants.FIELD_DATE + " ASC;";
+		
+		list= jdbc.query(sql, new BeanPropertyRowMapper<Signing>(Signing.class));
+		
+		return list;
+	}
+
+	public List<Signing> getSigningInformationByGamer(String name, int type){
+		
+		List<Signing> list = null;
+		
+		String sql = "SELECT * FROM " + Constants.SIGNING_TABLE;
+		String field = "";
+		if(type == Constants.SELLER) {
+			field = Constants.FIELD_SELLER;
+		}else if(type == Constants.BUYER) {
+			field = Constants.FIELD_BUYER;
+		}
+		sql +=  " WHERE " + field + " = '" + name + "' AND " 
+				+ Constants.FIELD_PRIZE + " > 0 ORDER BY "
+				+ Constants.FIELD_DATE + " DESC;";
 		
 		list= jdbc.query(sql, new BeanPropertyRowMapper<Signing>(Signing.class));
 		
