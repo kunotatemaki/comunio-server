@@ -209,7 +209,7 @@
         return null;
       }
     })
-    .controller('SidenavCtrl', ['$timeout', '$mdSidenav', '$log', function ($timeout, $mdSidenav, $log) {
+    .controller('SidenavCtrl', ['$scope', '$timeout', '$mdSidenav', '$log', function ($scope, $timeout, $mdSidenav, $log) {
       var sidenav = this;
       sidenav.close = function () {
         $mdSidenav('left').close()
@@ -217,6 +217,9 @@
             $log.debug("close LEFT is done");
           });
       };
+      $scope.$watch('gpdf.selectedPlayer', function() {
+        sidenav.close();
+      });
     }])
     .controller('GetPageDataCtrl', ['$scope', '$filter', 'appDataFactory' , function($scope, $filter, appDataFactory) {
       var gpdf = this;
